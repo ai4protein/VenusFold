@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "venusfold"
+version = "0.1.0"
+description = "Inference-only release of VenusFold"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {file = "LICENSE"}
+dependencies = [
+  "torch==2.7.1",
+  "cuequivariance-ops-torch-cu12==0.8.0",
+  "cuequivariance-torch==0.8.0",
+  "triton==3.3.1",
+  "ninja>=1.11.0",
+  "safetensors>=0.5.0",
+  "numpy==2.4.1",
+  "scipy>=1.9.0",
+  "pandas==2.3.1",
+  "scikit-learn==1.7.1",
+  "ml_collections==1.1.0",
+  "PyYAML==6.0.2",
+  "tqdm==4.67.1",
+  "rdkit==2025.9.3",
+  "biopython==1.85",
+  "biotite==1.4.0",
+  "modelcif==1.4",
+  "gemmi==0.6.7",
+  "pdbeccdutils==1.0.0",
+  "fair-esm==2.0.0",
+  "optree==0.17.0",
+  "networkx>=3.4.2",
+  "requests>=2.32.0",
+  "packaging>=24.0",
+  "typing_extensions>=4.12.0",
+]
+
+[project.optional-dependencies]
+hub = ["huggingface-hub>=0.34.0"]
+
+[project.scripts]
+venusfold = "runner.inference:run"
+
+[tool.setuptools.packages.find]
+include = ["venusfold*", "runner*", "configs*"]
+
+[tool.setuptools.package-data]
+venusfold = ["model/layer_norm/kernel/*"]

@@ -1,0 +1,18 @@
+model_name: venusfold
+load_strict: true
+dtype: bf16
+triangle_attention: cuequivariance
+triangle_multiplicative: cuequivariance
+enable_tf32: true
+enable_efficient_fusion: true
+enable_diffusion_shared_vars_cache: false
+use_msa: true
+use_template: false
+use_rna_msa: true
+num_workers: 0
+model:
+  N_cycle: 10
+  local_activation: silu
+sample_diffusion:
+  N_sample: 5
+  N_step: 200

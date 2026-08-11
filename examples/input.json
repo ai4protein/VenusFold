@@ -1,0 +1,13 @@
+[
+  {
+    "name": "venusfold_example",
+    "sequences": [
+      {
+        "proteinChain": {
+          "sequence": "MSTNPKPQRKTKRNTNRRPQDVKFPGG",
+          "count": 1
+        }
+      }
+    ]
+  }
+]
