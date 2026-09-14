@@ -106,6 +106,8 @@ molecule types and optional MSA/template fields.
 
 We gratefully acknowledge [Protenix by ByteDance](https://github.com/bytedance/Protenix),
 which inspired and informed substantial portions of the code in this project.
+The applicable upstream license is preserved in
+[`licenses/Protenix-Apache-2.0.txt`](licenses/Protenix-Apache-2.0.txt).
 
 ## License
 
