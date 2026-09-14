@@ -102,6 +102,11 @@ The default config uses five samples, 200 diffusion steps, and ten recycling
 cycles. See [the input-format guide](docs/input_format.md) for supported
 molecule types and optional MSA/template fields.
 
+## Acknowledgments
+
+We gratefully acknowledge [Protenix by ByteDance](https://github.com/bytedance/Protenix),
+which inspired and informed substantial portions of the code in this project.
+
 ## License
 
 The code is released under the MIT License. See [LICENSE](LICENSE). The model
