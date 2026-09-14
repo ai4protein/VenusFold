@@ -70,5 +70,6 @@ and result directories.
 
 The service wait limit is 1800 seconds by default and can be changed with
 `--max-wait-seconds`. Direct connections are used unless
-`VENUSFOLD_MSA_USE_ENV_PROXY=true` is set. Downloaded archives are checked for
-path traversal and link entries before extraction.
+`VENUSFOLD_MSA_USE_ENV_PROXY=true` is set. This setting also applies to the
+template database download. Downloaded archives are checked for path traversal
+and link entries before extraction.

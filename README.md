@@ -75,7 +75,8 @@ writes an adjacent `*_msa_template_audit.json` report.
 The MSA request times out after 30 minutes by default; use
 `--max-wait-seconds` to change this limit. Existing downloaded archives are
 reused when the command is restarted. Set `VENUSFOLD_MSA_USE_ENV_PROXY=true`
-only when the service must be reached through the environment proxy.
+only when the MSA service and template database must be reached through the
+environment proxy.
 
 ## Inference
 

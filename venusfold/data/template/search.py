@@ -32,12 +32,16 @@ def _download(url: str, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_suffix(destination.suffix + ".partial")
     logger.info("Downloading template database from %s", url)
-    with requests.get(url, stream=True, timeout=(10, 300)) as response:
-        response.raise_for_status()
-        with temporary.open("wb") as handle:
-            for chunk in response.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    handle.write(chunk)
+    with requests.Session() as session:
+        session.trust_env = os.environ.get(
+            "VENUSFOLD_MSA_USE_ENV_PROXY", "false"
+        ).lower() in {"1", "true", "yes"}
+        with session.get(url, stream=True, timeout=(10, 300)) as response:
+            response.raise_for_status()
+            with temporary.open("wb") as handle:
+                for chunk in response.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        handle.write(chunk)
     temporary.replace(destination)
 
 
