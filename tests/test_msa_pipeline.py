@@ -16,7 +16,7 @@ def _write_query_msa(directory: Path, sequence: str) -> None:
 def test_prepare_input_json_searches_unique_missing_sequences(
     tmp_path: Path, monkeypatch
 ) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     source = tmp_path / "input.json"
     source.write_text(
         json.dumps(
@@ -65,7 +65,7 @@ def test_prepare_input_json_searches_unique_missing_sequences(
 
 
 def test_prepare_input_json_preserves_existing_msa(tmp_path: Path, monkeypatch) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     existing = tmp_path / "existing.a3m"
     existing.write_text(f">query\n{sequence}\n")
     source = tmp_path / "input.json"
@@ -102,7 +102,7 @@ def test_prepare_input_json_preserves_existing_msa(tmp_path: Path, monkeypatch) 
 def test_prepare_input_json_replaces_mismatched_existing_msa(
     tmp_path: Path, monkeypatch
 ) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     mismatched = tmp_path / "mismatched.a3m"
     mismatched.write_text(">query\nWRONG\n")
     source = tmp_path / "input.json"
@@ -143,7 +143,7 @@ def test_prepare_input_json_replaces_mismatched_existing_msa(
 def test_prepare_input_json_reuses_matching_generated_output(
     tmp_path: Path, monkeypatch
 ) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     source = tmp_path / "input.json"
     source.write_text(
         json.dumps(
@@ -177,7 +177,7 @@ def test_prepare_input_json_reuses_matching_generated_output(
 def test_prepare_input_json_reuses_same_sequence_from_input(
     tmp_path: Path, monkeypatch
 ) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     existing = tmp_path / "existing.a3m"
     existing.write_text(f">query\n{sequence}\n")
     source = tmp_path / "input.json"
@@ -215,7 +215,7 @@ def test_prepare_input_json_reuses_same_sequence_from_input(
 
 
 def test_template_request_upgrades_msa_only_cache(tmp_path: Path, monkeypatch) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     source = tmp_path / "input.json"
     source.write_text(
         json.dumps(
@@ -264,7 +264,7 @@ def test_template_request_upgrades_msa_only_cache(tmp_path: Path, monkeypatch) -
 
 
 def test_legacy_audit_format_is_not_reused(tmp_path: Path, monkeypatch) -> None:
-    sequence = "ACDE"
+    sequence = "ABCDE"
     source = tmp_path / "input.json"
     source.write_text(
         json.dumps(
