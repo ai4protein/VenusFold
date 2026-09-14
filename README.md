@@ -111,6 +111,8 @@ The applicable upstream license is preserved in
 
 ## License
 
-The code is released under the MIT License. See [LICENSE](LICENSE). The model
-is intended for research use and is not validated for clinical or diagnostic
-use.
+VenusFold's code and released model weights are licensed under the Apache
+License 2.0 and may be used for commercial purposes, subject to the terms of
+the license. See [LICENSE](LICENSE). Third-party dependencies, data, and
+upstream components may be subject to their own licenses. The model is
+intended for research use and is not validated for clinical or diagnostic use.
