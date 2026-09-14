@@ -10,9 +10,14 @@ dist/
 /data/
 weights/
 output/
+logs/
 esm_embeddings/
 *.pt
 *.pth
 *.ckpt
 *.safetensors
+venusfold/model/layer_norm/.ninja_*
+venusfold/model/layer_norm/build.ninja
+venusfold/model/layer_norm/*.o
+venusfold/model/layer_norm/*.so
 .env

@@ -1,3 +1,4 @@
+import hashlib
 import json
 import logging
 import os
@@ -6,6 +7,7 @@ import traceback
 from argparse import Namespace
 from contextlib import nullcontext
 from os.path import exists as opexists, join as opjoin
+from pathlib import Path
 from typing import Any, Mapping
 
 import torch
@@ -45,6 +47,41 @@ def resolve_checkpoint_path(configs: Any) -> str:
     if configs.checkpoint_path:
         return configs.checkpoint_path
     return opjoin(configs.load_checkpoint_dir, f"{configs.model_name}.pt")
+
+
+def prepare_missing_msas(configs: Any) -> None:
+    if not configs.use_msa or not configs.auto_search_msa:
+        return
+
+    import fcntl
+
+    from venusfold.data.msa.pipeline import prepare_input_json
+
+    input_path = Path(configs.input_json_path).resolve()
+    fingerprint = hashlib.sha256(input_path.read_bytes()).hexdigest()[:16]
+    cache_root = (
+        Path(configs.msa_search_dir).resolve()
+        if configs.msa_search_dir
+        else Path(configs.dump_dir).resolve() / "input_features"
+    )
+    work_dir = cache_root / fingerprint
+    work_dir.mkdir(parents=True, exist_ok=True)
+    output_json = work_dir / f"{input_path.stem}_with_msa.json"
+
+    with (work_dir / ".prepare_msa.lock").open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        prepared_path = prepare_input_json(
+            input_path,
+            output_json,
+            work_dir / "msa",
+            host_url=configs.msa_server_url or None,
+            email=configs.msa_search_email,
+            poll_interval=configs.msa_poll_interval,
+            max_wait_seconds=configs.msa_max_wait_seconds,
+            include_templates=configs.use_template,
+        )
+    configs.input_json_path = str(prepared_path)
+    logger.info("Inference input with MSA: %s", prepared_path)
 
 
 class InferenceRunner:
@@ -361,6 +398,7 @@ def run() -> None:
     if configs.dry_run:
         logger.info("Dry run completed; model and checkpoint were not loaded.")
         return
+    prepare_missing_msas(configs)
     runner = InferenceRunner(configs)
     infer_predict(runner, configs)
 

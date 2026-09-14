@@ -7,6 +7,12 @@ enable_tf32: true
 enable_efficient_fusion: true
 enable_diffusion_shared_vars_cache: false
 use_msa: true
+auto_search_msa: true
+msa_search_dir: ""
+msa_server_url: ""
+msa_search_email: ""
+msa_poll_interval: 10
+msa_max_wait_seconds: 1800
 use_template: false
 use_rna_msa: true
 num_workers: 0
